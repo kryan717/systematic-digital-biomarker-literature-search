@@ -120,9 +120,9 @@ def make_csv(rows, name):
 # then, makes a csv for use in next round of lit review
 if __name__ == '__main__':
     # initiatilizes relevant variables
-    # pmid_USAled will nclude the pmid's of articles that meet the 50% USA led criteria
+    # pmid_USAled will include the pmid's of articles that meet the 50% USA led criteria
     pmid_USAled = list()
-    # pmid_USAled includes the pmid's of articles that meet the 50% USA led criteria
+    # pmid_non_USAled_or_no_US_academic includes the pmid's of articles that do not meet the 50% USA led criteria or by not having 1 US academic
     pmid_non_USAled_or_no_US_academic = list()
     # pmid_auth_aff is a dictionary with the pmid values as keys and holding a list of author followed by affiliation for each author
     pmid_auth_aff = {}

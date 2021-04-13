@@ -189,7 +189,7 @@ if __name__ == '__main__':
 
         for line in reader:
             # this replaces the authors box with the authors and their affiliation to the pubmed.csv
-            # this removes the lines that are not US led or don't have 
+            # this removes the lines that are not US led or have 'Review' in their title
             if line[0] not in pmid_non_USAled_or_no_US_academic and line[0] not in titles_w_review:
                 # this adds the edited line to the final list of rows
                 lines.append(line)  

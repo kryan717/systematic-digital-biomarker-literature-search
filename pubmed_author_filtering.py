@@ -16,7 +16,7 @@ import csv
 # returning a Boolean value
 def is_USA(fau, info):
     for affiliation in info[fau]:
-        # affiliation had a list of the affiliations of a given professor (fau)
+        # affiliation had a list of the affiliations of a given author (fau)
         if re.search('USA', affiliation, re.IGNORECASE):
             return True
     
@@ -27,7 +27,7 @@ def is_USA(fau, info):
 # returning a Boolean value
 def is_college(fau, info):
     for affiliation in info[fau]:
-        # affiliation had a list of the affiliations of a given professor (fau)
+        # affiliation had a list of the affiliations of a given author (fau)
         if re.search('college', affiliation, re.IGNORECASE)  or re.search('university', affiliation, re.IGNORECASE) or re.search('school', affiliation, re.IGNORECASE) or re.search('institute', affiliation, re.IGNORECASE) or re.search('society', affiliation, re.IGNORECASE):
             return True
     
@@ -124,8 +124,8 @@ if __name__ == '__main__':
     pmid_USAled = list()
     # pmid_USAled includes the pmid's of articles that meet the 50% USA led criteria
     pmid_non_USAled_or_no_US_academic = list()
-    # pmid_prof_aff is a dictionary with the pmid values as keys and holding a list of author followed by affiliation for each author
-    pmid_prof_aff = {}
+    # pmid_auth_aff is a dictionary with the pmid values as keys and holding a list of author followed by affiliation for each author
+    pmid_auth_aff = {}
 
 
     # local filepath of .txt file
@@ -147,25 +147,25 @@ if __name__ == '__main__':
         # this is a boolean to see if a given pmid has a US based academic author
         one_college_USA = False
         # creates list in the dictionary
-        pmid_prof_aff[pmid] = list()
+        pmid_auth_aff[pmid] = list()
 
-        # goes through each professor in nested dictionary
-        for profs in info[pmid]:
+        # goes through each author in nested dictionary
+        for author in info[pmid]:
 
-            # this add the professor and all affiliations to a new list
-            pmid_prof_aff[pmid].append(profs)
-            pmid_prof_aff[pmid].append(info[pmid][profs])
+            # this add the author and all affiliations to a new list
+            pmid_auth_aff[pmid].append(author)
+            pmid_auth_aff[pmid].append(info[pmid][author])
 
 
             # this checks first if an author is US based
-            if is_USA(profs, info[pmid]):
+            if is_USA(author, info[pmid]):
                 # if yes, adds to US count
                 usa_count = usa_count+1
                 # then checks if the author is an academic
-                if is_college(profs, info[pmid]):
+                if is_college(author, info[pmid]):
                     # if yes, boolean turns to True
                     one_college_USA = True
-                # count still added to overall # of professors
+                # count still added to overall # of authors
                 count = count + 1
             else:
                 # if not US, count still added
@@ -207,12 +207,12 @@ if __name__ == '__main__':
     for pmid in pmid_USAled:
         # adds pmid by itself in a list
         lines_cleaned.append([pmid])
-        # goes through each professor
-        for profs in info[pmid]:
-            # adds the professor
-            lines_cleaned[current_row].append(profs) 
-            # adds the list of the professors affiliations
-            for affiliation in info[pmid][profs]:
+        # goes through each author
+        for author in info[pmid]:
+            # adds the author
+            lines_cleaned[current_row].append(author) 
+            # adds the list of the authors affiliations
+            for affiliation in info[pmid][author]:
                 lines_cleaned[current_row].append(affiliation)
         # keeps track of row
         current_row = current_row + 1

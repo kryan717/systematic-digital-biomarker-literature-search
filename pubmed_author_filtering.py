@@ -204,18 +204,20 @@ if __name__ == '__main__':
     lines_cleaned = list()
     current_row = 0
     # goes through each pmid
-    for pmid in pmid_USAled:
-        # adds pmid by itself in a list
-        lines_cleaned.append([pmid])
-        # goes through each author
-        for author in info[pmid]:
-            # adds the author
-            lines_cleaned[current_row].append(author) 
-            # adds the list of the authors affiliations
-            for affiliation in info[pmid][author]:
-                lines_cleaned[current_row].append(affiliation)
-        # keeps track of row
-        current_row = current_row + 1
+       for pmid in pmid_USAled:
+        # if statement maintains same pmid's accepted as above
+        if pmid not in pmid_non_USAled_or_no_US_academic and pmid not in titles_w_review:
+            # adds pmid by itself in a list
+            lines_cleaned.append([pmid])
+            # goes through each author
+            for author in info[pmid]:
+                # adds the author
+                lines_cleaned[current_row].append(author) 
+                # adds the list of the authors affiliations
+                for affiliation in info[pmid][author]:
+                    lines_cleaned[current_row].append(affiliation)
+            # keeps track of row
+            current_row = current_row + 1
 
     # makes the csv
     make_csv(lines_cleaned, 'pubmed_filtered_limited.csv')
